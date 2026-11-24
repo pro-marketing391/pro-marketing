@@ -1658,6 +1658,43 @@ body[data-page=home] .svc:hover .ico{opacity:.6}
   .wd-filters{flex-wrap:nowrap;overflow-x:auto;margin-inline:-18px;padding:0 18px 4px;scrollbar-width:none}.wd-filters::-webkit-scrollbar{display:none}.wd-f{flex:none}
 }
 
+/* ==================== v20 WEB PAGE REFRESH ==================== */
+@media(min-width:1021px){.wd-svc:not(.has-list){grid-column:span 3}}
+.wd-svc-n{position:absolute;top:18px;inset-inline-end:20px;font:900 30px/1 inherit;background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.55}
+.wd-steps{grid-template-columns:repeat(5,minmax(0,1fr))}
+/* technology wall: floating glass cards with a slow 3D sway (desktop only) */
+.wd-tech{perspective:900px}
+@media(min-width:701px) and (prefers-reduced-motion:no-preference){
+  .wd-t{animation:wdTechFloat 7s ease-in-out infinite;animation-delay:calc(var(--i) * -.7s)}
+  .wd-t:hover{animation-play-state:paused}
+}
+@keyframes wdTechFloat{0%,100%{transform:translateY(0) rotateY(0) rotateX(0)}30%{transform:translateY(-6px) rotateY(10deg) rotateX(4deg)}70%{transform:translateY(-2px) rotateY(-10deg) rotateX(-3deg)}}
+/* performance section */
+.wd-perf-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:center}
+.wd-perf .h2{font-size:clamp(24px,2.6vw,36px);line-height:1.45}.wd-perf .mut{margin-top:12px}
+.wd-perf-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wd-perf-list li{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:13px 14px;border-radius:16px;background:linear-gradient(160deg,rgba(46,139,255,.09),rgba(255,255,255,.02));border:1px solid rgba(46,139,255,.22);transition:border-color .3s,transform .3s}
+.wd-perf-list li:hover{border-color:rgba(34,211,238,.55);transform:translateY(-2px)}
+.wd-perf-list li>span:nth-child(2){font-weight:700;color:#fff;font-size:14.5px}
+.wd-perf-list small{grid-column:2;color:#8f93b8;font-size:11.5px}
+.wd-pi{grid-row:1/3;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--cy);background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3)}
+.wd-pi svg{width:20px;height:20px}
+.wd-speed{position:relative;margin-top:26px;height:180px;display:flex;align-items:center;gap:18px}
+.wd-sp-phone{width:96px;height:170px;border-radius:20px;padding:22px 10px 10px;display:grid;gap:8px;align-content:start;background:linear-gradient(160deg,#24242e,#0c0c12);border:1px solid rgba(255,255,255,.16);box-shadow:0 20px 40px -18px #000,0 0 30px -10px rgba(46,139,255,.7)}
+.wd-sp-phone .sk{display:block;border-radius:6px;background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(139,92,255,.45),rgba(255,255,255,.08));background-size:200% 100%;animation:wdLoad 1.6s ease-out infinite}
+.sk.a{height:34px}.sk.b{height:10px;width:80%}.sk.c{height:10px;width:60%}.sk.d{height:44px;animation-delay:.2s}
+@keyframes wdLoad{0%{background-position:100% 0}60%,100%{background-position:-100% 0}}
+.wd-sp-lines{display:grid;gap:10px}.wd-sp-lines i{display:block;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,var(--cy));animation:wdSpeed 1.2s linear infinite}
+.wd-sp-lines i:nth-child(1){width:110px}.wd-sp-lines i:nth-child(2){width:70px;animation-delay:.3s}.wd-sp-lines i:nth-child(3){width:140px;animation-delay:.6s}
+[dir=rtl] .wd-sp-lines i{background:linear-gradient(270deg,transparent,var(--cy))}
+@keyframes wdSpeed{0%{opacity:0;transform:translateX(-20px)}50%{opacity:1}100%{opacity:0;transform:translateX(20px)}}
+@media(max-width:1020px){.wd-perf-in{grid-template-columns:1fr}}
+@media(max-width:700px){.wd-steps{display:flex}.wd-perf-list{grid-template-columns:1fr}.wd-speed{display:none}.wd-svc-n{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.wd-sp-phone .sk,.wd-sp-lines i{animation:none}}
+.wd-svc-n{inset-inline-end:auto}
+[dir=rtl] .wd-svc-n{left:20px;right:auto}[dir=ltr] .wd-svc-n{right:20px;left:auto}
+.wd-perf-list li:not(:has(small)) .wd-pi{grid-row:auto}
+
 </style>
 </head>
 <body>
@@ -4424,14 +4461,14 @@ function bindHScroll() {
    hero, process, portfolio and form are upgraded in place — nothing is duplicated.
    Portfolio items are concept projects (clearly labelled); "View project" appears only for real URLs.
    ===================================================================== */
-const WEB_WA = 'أهلاً، عايز أطلب عرض سعر لتصميم وتطوير موقع إلكتروني.';
+const WEB_WA = 'أهلاً، عايز أستفسر عن خدمات تصميم وتطوير المواقع.';
 const wdWaAttrs = extra => `href="${esc(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(WEB_WA + (extra ? '\n\n' + extra : ''))}`)}" target="_blank" rel="noopener noreferrer" data-wa`;
 
 const WD = {
-  h1: ['مش بنعملك مجرد موقع... بنبني لك مستقبل شغلك أونلاين.', 'WE BUILD DIGITAL EXPERIENCES THAT GROW BUSINESSES.'],
-  h1alt: ['WE BUILD DIGITAL EXPERIENCES THAT GROW BUSINESSES.', 'مش بنعملك مجرد موقع... بنبني لك مستقبل شغلك أونلاين.'],
-  desc: ['من أول فكرة وتصميم لحد البرمجة والإطلاق، بنقدم حلول ويب احترافية مصممة على حسب طبيعة نشاطك التجاري، تساعدك تبني حضور رقمي قوي وتوصل لعملائك بشكل احترافي.',
-    'From the first idea and design to development and launch, we deliver professional web solutions tailored to your business, helping you build a strong digital presence and reach your customers professionally.'],
+  h1: ['مش بنعملك مجرد موقع… بنبني لك مستقبل شغلك أونلاين.', 'WE BUILD DIGITAL EXPERIENCES THAT GROW BUSINESSES.'],
+  h1alt: ['WE BUILD DIGITAL EXPERIENCES THAT GROW BUSINESSES.', 'مش بنعملك مجرد موقع… بنبني لك مستقبل شغلك أونلاين.'],
+  desc: ['من أول فكرة وتصميم لحد البرمجة والإطلاق، بنقدم حلول ويب احترافية مصممة على حسب طبيعة نشاطك التجاري، بهدف تحويل الزوار لعملاء حقيقيين.',
+    'From the first idea and design to development and launch, we deliver professional web solutions tailored to your business, built to turn visitors into real customers.'],
   words: ['DESIGN.', 'DEVELOP.', 'LAUNCH.', 'GROW.'],
   start: ['ابدأ مشروعك', 'Start Your Project'], quote: ['اطلب عرض سعر', 'Request a Quote'], team: ['تواصل مع فريقنا', 'Contact Our Team'],
   badge: ['تسليم خلال 4–7 أيام عمل*', 'Delivery in 4–7 business days*'],
@@ -4440,13 +4477,13 @@ const WD = {
   techT: ['التقنيات والمنصات', 'Technologies & platforms'], techS: ['نختار التقنية المناسبة لمشروعك، مش العكس.', 'We pick the right technology for your project, not the other way round.'],
   tg: [['البرمجة', 'Programming'], ['المنصات', 'Platforms'], ['الأدوات والبنية التحتية', 'Tools & infrastructure']],
   logoNote: ['الشعارات علامات تجارية لأصحابها، ومعروضة للإشارة إلى التقنيات التي نعمل بها فقط.', 'Logos are trademarks of their respective owners, shown only to indicate the technologies we use.'],
-  delT: ['تسليم موقعك خلال 4 إلى 7 أيام عمل', 'Website delivery in 4–7 business days'], delEn: 'WEBSITE DELIVERY IN 4–7 BUSINESS DAYS.',
+  delT: ['مدة تنفيذ وتسليم الموقع: من 4 إلى 7 أيام عمل', 'Build & delivery time: 4–7 business days'], delEn: 'YOUR WEBSITE. READY TO LAUNCH.',
   days: ['أيام عمل', 'business days'],
   delN1: ['مدة التسليم تبدأ بعد استلام كل المحتوى والمواد والموافقات المطلوبة.', 'The delivery timeline starts after we receive all required content, materials and approvals.'],
-  delN2: ['المدة الفعلية تعتمد على حجم المشروع ودرجة تعقيده والوظائف المطلوبة.', 'Actual timing depends on the project scope, complexity and required functionality.'],
-  priceEn: 'EVERY PROJECT IS UNIQUE. EVERY WEBSITE IS DIFFERENT.',
-  priceAr: ['كل مشروع ليه احتياجاته الخاصة، وعشان كده تكلفة تصميم وتطوير الموقع بتختلف من مشروع للتاني حسب طبيعة النشاط ومتطلبات التنفيذ.', 'Every project has its own needs, so the cost of designing and developing a website differs from one project to another depending on the business and its requirements.'],
-  priceDep: ['التكلفة بتعتمد على:', 'Pricing depends on:'], priceNo: ['ما نعرض أسعاراً ثابتة مضللة؛ كل عرض سعر مكتوب ومفصّل لمشروعك.', 'We don’t show misleading fixed prices; every quote is written and detailed for your project.'],
+  delN2: ['المدة الفعلية تعتمد على نوع الموقع وحجمه ومتطلبات المشروع.', 'Actual timelines depend on the website type, scope and project requirements.'],
+  priceEn: 'EVERY BUSINESS IS DIFFERENT. SO IS EVERY WEBSITE.',
+  priceAr: ['كل مشروع ليه احتياجاته، وعشان كده تكلفة تصميم وتطوير الموقع بتختلف من مشروع للتاني.', 'Every project has its own needs, which is why the cost of designing and developing a website differs from one project to the next.'],
+  priceDep: ['السعر النهائي بيعتمد على:', 'The final price depends on:'], priceNo: ['ما نعرض أسعاراً ثابتة مضللة؛ كل عرض سعر مكتوب ومفصّل لمشروعك.', 'We don’t show misleading fixed prices; every quote is written and detailed for your project.'],
   priceBtn: ['اطلب عرض السعر المخصص لمشروعك', 'Request Your Custom Quotation'],
   procT: ['مراحل تطوير موقعك', 'Development process'], procS: ['اضغط على أي مرحلة لتشوف تفاصيلها.', 'Tap any stage to see its details.'],
   pfT: ['معرض المواقع', 'Website portfolio'], pfS: ['نماذج توضّح أسلوبنا في تصميم وتطوير المواقع.', 'Examples that show how we design and build websites.'],
@@ -4459,21 +4496,24 @@ const WD = {
   send: ['أرسل الطلب', 'Send request'], sending: ['جارٍ الإرسال…', 'Sending…'], req: ['مطلوب', 'Required'], badPhone: ['رقم غير صحيح', 'Invalid number'],
   ok: ['تم استلام طلبك ✅ فريقنا بيتواصل معك قريباً.', 'Request received ✅ Our team will contact you soon.'],
   fail: ['تعذّر إرسال الطلب الآن. أرسله لنا واتساب برسالة جاهزة:', 'We couldn’t send your request right now. Send it on WhatsApp in a ready message:'],
-  ctaT: ['جاهز نبني موقعك؟', 'Ready to build your website?'], ctaS: ['خطوة واحدة تفصلك عن موقع يشتغل لنشاطك ليل ونهار.', 'One step away from a website that works for your business day and night.']
+  ctaT: ['ابدأ وجودك الرقمي بشكل احترافي مع <bdi dir="ltr">Pro Markting</bdi>.', 'YOUR BUSINESS DESERVES A POWERFUL WEBSITE.'], ctaEn: 'YOUR BUSINESS DESERVES A POWERFUL WEBSITE.', ctaS: ['من الفكرة للإطلاق، فريقنا معك في كل خطوة.', 'From idea to launch, our team is with you at every step.'],
+  getQuote: ['اطلب عرض سعر مخصص', 'Get a Custom Quote'], contact: ['تواصل معنا', 'Contact Us'],
+  perfEn: 'FAST. RESPONSIVE. BUILT TO PERFORM.', perfT: ['موقعك لازم يكون سريع على كل الأجهزة، مش مجرد شكل حلو.', 'Your website must be fast on every device, not just good-looking.'],
+  perfS: ['الأداء أولوية في كل موقع نطوّره، من أول سطر كود.', 'Performance is a priority in every website we build, from the first line of code.'],
 };
 const WD_SVC = [
-  { id: 'custom', ic: 'code', t: ['تطوير مواقع ببرمجة مخصصة', 'Custom Web Development'], d: ['نطور مواقع إلكترونية ببرمجة مخصصة تناسب احتياجات مشروعك، مع تصميم احترافي وتجربة استخدام متطورة.', 'Custom-coded websites built around your project’s needs, with professional design and an advanced user experience.'],
-    l: [['برمجة مواقع مخصصة', 'Custom Website Coding'], ['تطوير React و Next.js', 'React & Next.js Development'], ['تطوير الواجهات الأمامية', 'Frontend Development'], ['تطوير الأنظمة الخلفية', 'Backend Development'], ['تطبيقات ويب مخصصة', 'Custom Web Applications'], ['ربط قواعد البيانات', 'Database Integration'], ['ربط الأنظمة عبر API', 'API Integrations'], ['لوحات تحكم مخصصة', 'Custom Dashboards']] },
-  { id: 'shopify', logo: 'shopify', t: ['تطوير متاجر Shopify', 'Shopify Development'], d: ['ننشئ ونطور متاجر Shopify احترافية تساعدك على عرض منتجاتك وإدارة مبيعاتك وتقديم تجربة شراء مميزة.', 'Professional Shopify stores that showcase your products, manage your sales and deliver a great shopping experience.'],
-    l: [['إعداد متجر Shopify', 'Shopify Store Setup'], ['قوالب Shopify مخصصة', 'Custom Shopify Themes'], ['تصميم وتخصيص المتجر', 'Store Design & Customization'], ['إعداد المنتجات والمجموعات', 'Product & Collection Setup'], ['ربط بوابات الدفع', 'Payment Integration'], ['ربط الشحن', 'Shipping Integration'], ['تحسين أداء المتجر', 'Store Optimization'], ['تصميم متجاوب', 'Responsive Shopify Design']] },
-  { id: 'wordpress', logo: 'wordpress', t: ['تطوير مواقع WordPress', 'WordPress Development'], d: ['نصمم ونطور مواقع WordPress احترافية مرنة وسهلة الإدارة وقابلة للتوسع.', 'Professional WordPress websites that are flexible, easy to manage and ready to scale.'],
-    l: [['مواقع الأعمال', 'Business Websites'], ['مواقع الشركات', 'Corporate Websites'], ['تخصيص WordPress', 'WordPress Customization'], ['تطوير بـ Elementor', 'Elementor Development'], ['قوالب WordPress مخصصة', 'Custom WordPress Themes'], ['تحسين أداء WordPress', 'WordPress Optimization'], ['صيانة المواقع', 'Website Maintenance']] },
-  { id: 'woo', logo: 'woocommerce', t: ['تطوير متاجر WooCommerce', 'WooCommerce Development'], d: ['متاجر إلكترونية متكاملة لإدارة المنتجات والطلبات والمبيعات.', 'Complete online stores to manage products, orders and sales.'],
-    l: [['تطوير المتجر الإلكتروني', 'Online Store Development'], ['إدارة المنتجات', 'Product Management'], ['سلة المشتريات', 'Shopping Cart'], ['ربط صفحة الدفع', 'Checkout Integration'], ['ربط بوابات الدفع', 'Payment Integration'], ['إدارة الطلبات', 'Order Management'], ['تخصيص المتجر', 'Store Customization']] },
-  { id: 'ecom', ic: 'cart', t: ['حلول التجارة الإلكترونية', 'E-Commerce Development'], d: ['حلول تجارة إلكترونية مصممة لتناسب طبيعة نشاطك التجاري.', 'E-commerce solutions designed around the nature of your business.'] },
-  { id: 'landing', ic: 'target', t: ['تطوير صفحات الهبوط', 'Landing Page Development'], d: ['صفحات هبوط احترافية مصممة لدعم الحملات الإعلانية وتحسين تجربة الزوار وزيادة فرص التحويل.', 'Professional landing pages built to support ad campaigns, improve the visitor experience and increase conversion opportunities.'] },
-  { id: 'redesign', ic: 'refresh', t: ['إعادة تصميم وتحسين المواقع', 'Website Redesign & Optimization'], d: ['تطوير المواقع الحالية وتحسين التصميم والسرعة وتجربة المستخدم والتوافق مع جميع الأجهزة.', 'Upgrading existing websites: design, speed, user experience and compatibility with every device.'] }
+  { id: 'custom', ic: 'code', t: ['تطوير مواقع ببرمجة مخصصة', 'Custom Web Development'], d: ['تطوير مواقع إلكترونية ببرمجة مخصصة حسب احتياجات مشروعك.', 'Custom-coded websites built around your project’s needs.'],
+    l: [['HTML و CSS و JavaScript', 'HTML, CSS, JavaScript'], ['React و Next.js', 'React & Next.js'], ['تطوير واجهات أمامية مخصصة', 'Custom frontend development'], ['تطوير الأنظمة الخلفية', 'Backend development'], ['ربط قواعد البيانات', 'Database integration'], ['ربط الأنظمة عبر API', 'API integrations'], ['لوحات تحكم وأنظمة مخصصة', 'Custom dashboards and systems']] },
+  { id: 'shopify', logo: 'shopify', t: ['تطوير متاجر Shopify', 'Shopify Development'], d: ['إنشاء وتطوير متاجر Shopify احترافية لبيع منتجاتك أونلاين.', 'Professional Shopify stores built to sell your products online.'],
+    l: [['إعداد متجر Shopify', 'Shopify Store Setup'], ['قوالب Shopify مخصصة', 'Custom Shopify Themes'], ['إعداد المنتجات والمجموعات', 'Product & Collection Setup'], ['ربط الدفع والشحن', 'Payment & Shipping Integration'], ['تخصيص المتجر', 'Store Customization'], ['تصميم يركّز على التحويل', 'Conversion-Focused Design']] },
+  { id: 'wordpress', logo: 'wordpress', t: ['تطوير مواقع WordPress', 'WordPress Development'], d: ['مواقع WordPress احترافية مرنة وسهلة الإدارة.', 'Professional WordPress websites that are flexible and easy to manage.'],
+    l: [['مواقع الأعمال', 'Business Websites'], ['مواقع الشركات', 'Corporate Websites'], ['صفحات الهبوط', 'Landing Pages'], ['تطوير بـ Elementor', 'Elementor Development'], ['متاجر WooCommerce', 'WooCommerce Stores'], ['قوالب WordPress مخصصة', 'Custom WordPress Themes']] },
+  { id: 'ecom', ic: 'cart', t: ['تطوير المتاجر الإلكترونية', 'E-Commerce Development'], d: ['متاجر إلكترونية متكاملة تساعدك على إدارة وبيع منتجاتك.', 'Complete online stores that help you manage and sell your products.'],
+    l: [['إدارة المنتجات', 'Product Management'], ['سلة المشتريات', 'Shopping Cart'], ['ربط دفع آمن', 'Secure Checkout Integration'], ['تصميم متجر متجاوب', 'Responsive Store Design'], ['إدارة الطلبات', 'Order Management'], ['ربط الدفع والشحن', 'Payment & Shipping Integrations']] },
+  { id: 'landing', ic: 'target', t: ['تصميم صفحات الهبوط', 'Landing Page Design'], d: ['صفحات هبوط احترافية مصممة لدعم حملاتك الإعلانية وزيادة التحويلات.', 'Professional landing pages designed to support your ad campaigns and increase conversions.'] },
+  { id: 'redesign', ic: 'refresh', t: ['إعادة تصميم وتحسين المواقع', 'Website Redesign & Optimization'], d: ['تطوير المواقع الحالية وتحسين شكلها وسرعتها وتجربة المستخدم.', 'Upgrading existing websites: their look, speed and user experience.'] }
 ];
+const WD_PERF = [['mobile', ['تطوير يبدأ من الجوال', 'Mobile-First Development']], ['grid', ['تصميم متجاوب بالكامل', 'Fully Responsive Design']], ['image', ['صور ووسائط محسّنة', 'Optimized Images & Media']], ['lazy', ['تحميل كسول للمحتوى', 'Lazy Loading']], ['code', ['JavaScript و CSS محسّنين', 'Optimized JavaScript & CSS']], ['db', ['استعلامات قواعد بيانات فعّالة', 'Efficient Database Queries']], ['cache', ['تخزين مؤقت وتحسين أداء', 'Caching & Performance Optimization']], ['seo', ['هيكل صديق لمحركات البحث', 'SEO-Friendly Structure']], ['vitals', ['تحسين مؤشرات Core Web Vitals', 'Core Web Vitals Optimization']], ['browser', ['توافق مع كل المتصفحات', 'Cross-Browser Compatibility']], ['shield', ['ممارسات تطوير آمنة', 'Secure Development Practices']]];
 const TECH = [
   [['html5', 'HTML5', '#E34F26'], ['css', 'CSS3', '#7B61FF'], ['javascript', 'JavaScript', '#F7DF1E'], ['typescript', 'TypeScript', '#3178C6'], ['react', 'React', '#61DAFB'], ['nextdotjs', 'Next.js', '#FFFFFF'], ['nodedotjs', 'Node.js', '#5FA04E'], ['php', 'PHP', '#8892BF'], ['laravel', 'Laravel', '#FF2D20'], ['python', 'Python', '#3776AB']],
   [['wordpress', 'WordPress', '#3B9BD8'], ['shopify', 'Shopify', '#7AB55C'], ['woocommerce', 'WooCommerce', '#A46497'], ['webflow', 'Webflow', '#146EF5'], ['wix', 'Wix', '#FFFFFF']],
@@ -4481,16 +4521,15 @@ const TECH = [
 ];
 const WD_DAYS = [['DAY 01', ['التخطيط والهيكل', 'Planning & Structure'], ['تحديد فكرة الموقع وهيكله ومتطلباته.', 'Defining the site’s idea, structure and requirements.']],
   ['DAY 02', ['تصميم الواجهات وتجربة المستخدم', 'UI/UX Design'], ['تصميم الواجهات وتجربة المستخدم.', 'Designing the interfaces and user experience.']],
-  ['DAY 03–05', ['التطوير والبرمجة', 'Development & Coding'], ['البرمجة وتنفيذ جميع الوظائف المطلوبة.', 'Coding and building every required feature.']],
+  ['DAY 03–05', ['التطوير والتنفيذ', 'Development & Implementation'], ['البرمجة وتنفيذ جميع الوظائف المطلوبة.', 'Coding and building every required feature.']],
   ['DAY 06', ['الاختبار والتحسين', 'Testing & Optimization'], ['اختبار الموقع وتحسين الأداء والتوافق.', 'Testing the site and optimising performance and compatibility.']],
-  ['DAY 07', ['المراجعة النهائية والتسليم', 'Final Review & Delivery'], ['المراجعة النهائية وتسليم الموقع.', 'Final review and handover of the website.']]];
-const WD_PRICE = [['نوع النشاط', 'Business industry'], ['نوع الموقع', 'Website type'], ['عدد الصفحات', 'Number of pages'], ['درجة تعقيد التصميم', 'Design complexity'], ['البرمجة المخصصة', 'Custom coding'], ['المميزات المطلوبة', 'Required features'], ['وظائف التجارة الإلكترونية', 'E-commerce functionality'], ['الربط مع أنظمة خارجية', 'Third-party integrations'], ['حجم المشروع', 'Project scope']];
-const WD_PROC = [['DISCOVERY', ['الاكتشاف', 'Discovery'], ['نفهم طبيعة نشاطك التجاري وأهدافك.', 'We understand your business and your goals.']],
-  ['PLANNING', ['التخطيط', 'Planning'], ['نحدد هيكل الموقع والوظائف المطلوبة.', 'We define the site structure and required functions.']],
-  ['DESIGN', ['التصميم', 'Design'], ['نصمم واجهات احترافية وتجربة مستخدم مميزة.', 'We design professional interfaces and a standout user experience.']],
-  ['DEVELOPMENT', ['التطوير', 'Development'], ['نحول التصميم إلى موقع فعلي بالبرمجة والتقنيات المناسبة.', 'We turn the design into a working website with the right code and technology.']],
-  ['TESTING', ['الاختبار', 'Testing'], ['نختبر الموقع على الموبايل والكمبيوتر ونتأكد من الأداء.', 'We test the site on mobile and desktop and verify performance.']],
-  ['DELIVERY', ['التسليم', 'Delivery'], ['نسلمك الموقع بعد المراجعة والاعتماد النهائي.', 'We hand over the site after final review and approval.']]];
+  ['DAY 07', ['التسليم النهائي والإطلاق', 'Final Delivery & Launch'], ['المراجعة النهائية وتسليم الموقع جاهز للإطلاق.', 'Final review and handover, ready to launch.']]];
+const WD_PRICE = [['نوع الموقع', 'Website type'], ['عدد الصفحات', 'Number of pages'], ['درجة تعقيد التصميم', 'Design complexity'], ['المميزات المطلوبة', 'Required features'], ['متطلبات البرمجة المخصصة', 'Custom coding requirements'], ['ربط أنظمة التجارة الإلكترونية', 'E-commerce integrations'], ['الخدمات الخارجية', 'Third-party services'], ['حجم المشروع', 'Project scope']];
+const WD_PROC = [['DISCOVERY', ['الاكتشاف', 'Discovery'], ['نفهم نشاطك التجاري وأهدافك.', 'We understand your business and your goals.']],
+  ['PLANNING & DESIGN', ['التخطيط والتصميم', 'Planning & Design'], ['نحدد الهيكل ونصمم تجربة المستخدم.', 'We define the structure and design the user experience.']],
+  ['DEVELOPMENT', ['التطوير', 'Development'], ['نبدأ البرمجة والتنفيذ.', 'We start coding and building.']],
+  ['TESTING', ['الاختبار', 'Testing'], ['نختبر الموقع على الموبايل والكمبيوتر ونراجع الأداء.', 'We test the site on mobile and desktop and review performance.']],
+  ['DELIVERY', ['التسليم', 'Delivery'], ['نسلمك الموقع جاهز للإطلاق بعد اعتمادك النهائي.', 'We hand over the site ready to launch after your final approval.']]];
 const WD_CATS = [['all', WD.all], ['custom', ['مواقع ببرمجة مخصصة', 'Custom Coded Websites']], ['shopify', ['متاجر Shopify', 'Shopify Stores']], ['wordpress', ['مواقع WordPress', 'WordPress Websites']], ['ecom', ['متاجر إلكترونية', 'E-Commerce Stores']], ['corporate', ['مواقع شركات', 'Corporate Websites']], ['landing', ['صفحات هبوط', 'Landing Pages']]];
 // Portfolio: concept projects (fictional brands from the portfolio). Add real work with url: 'https://…' and concept: false.
 const WD_WORK = [
@@ -4511,6 +4550,16 @@ const WI = {
   target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
   refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L3 9"/><path d="M3 4v5h5M4 13a8 8 0 0 0 14.6 4.5L21 15"/><path d="M21 20v-5h-5"/></svg>',
   tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/></svg>',
+  mobile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
+  grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><rect x="14" y="10" width="7" height="10" rx="1.5"/><path d="M8 20h4"/></svg>',
+  image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/></svg>',
+  lazy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3v4M12 17v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M3 12h4M17 12h4"/></svg>',
+  db: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></svg>',
+  cache: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
+  seo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8M8 10.5h5M10.5 8v5"/></svg>',
+  vitals: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg>',
+  browser: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9V6z"/><path d="m9 12 2 2 4-4"/></svg>',
   clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const tlogo = (id, color, cls = '') => `<i class="tl ${cls}" style="--tl:url('tech-icons/${id}.svg');--tc:${color}" aria-hidden="true"></i>`;
@@ -4547,7 +4596,7 @@ function webDevPage(s) {
   <div class="rv who"><h2 class="blk-title">${L(UI.whoNeeds)}</h2><ul>${s.who.map(x => `<li>${I.check}<span>${L(x)}</span></li>`).join('')}</ul></div>
 </div></section>
 <section class="band wd-sec" id="wdServices"><div class="wrap">${secHead(L(UI.nav.services), L(WD.svcT), L(WD.svcS))}
-  <div class="wd-svcs">${WD_SVC.map((v, i) => `<article class="wd-svc rv${v.l ? ' has-list' : ''}" style="--d:${i}"><div class="wd-svc-h"><span class="wd-svc-ic">${v.logo ? tlogo(v.logo, TECH.flat().find(x => x[0] === v.logo)[2], 'lg') : WI[v.ic]}</span><div><h3>${L(v.t)}</h3><small dir="ltr">${esc(v.t[1])}</small></div></div><p>${L(v.d)}</p>
+  <div class="wd-svcs">${WD_SVC.map((v, i) => `<article class="wd-svc rv${v.l ? ' has-list' : ''}" style="--d:${i}"><span class="wd-svc-n" dir="ltr">${String(i + 1).padStart(2, '0')}</span><div class="wd-svc-h"><span class="wd-svc-ic">${v.logo ? tlogo(v.logo, TECH.flat().find(x => x[0] === v.logo)[2], 'lg') : WI[v.ic]}</span><div><h3>${L(v.t)}</h3><small dir="ltr">${esc(v.t[1])}</small></div></div><p>${L(v.d)}</p>
     ${v.l ? `<details class="wd-list"><summary>${L(WD.showList)} <span aria-hidden="true">${v.l.length}</span></summary><ul>${v.l.map(x => `<li>${I.check}<span>${L(x)}</span></li>`).join('')}</ul></details>` : ''}</article>`).join('')}</div></div></section>
 <section class="band alt"><div class="wrap">${secHead(L(UI.explanation), L(UI.included))}
   <ol class="inc">${s.included.map(([t, d], i) => `<li class="rv"><span class="in-n">${String(i + 1).padStart(2, '0')}</span><h3>${L(t)}</h3><p>${L(d)}</p></li>`).join('')}</ol></div></section>
@@ -4558,6 +4607,9 @@ ${typesBlock}
 <section class="band wd-sec wd-del" id="wdDelivery"><div class="wrap"><div class="wd-del-head rv"><div class="wd-del-num" dir="ltr"><b>4–7</b><span>${L(WD.days)}</span></div><div><span class="eyebrow wd-eb">${WD.delEn}</span><h2 class="h2">${L(WD.delT)}</h2></div></div>
   <ol class="wd-rail">${WD_DAYS.map(([d, t, x], i) => `<li class="rv" style="--i:${i}"><span class="wd-node"></span><span class="wd-day" dir="ltr">${d}</span><h3>${L(t)}</h3><p>${L(x)}</p></li>`).join('')}</ol>
   <ul class="wd-cond rv"><li>${WI.clock}<span>${L(WD.delN1)}</span></li><li>${WI.tag}<span>${L(WD.delN2)}</span></li></ul></div></section>
+<section class="band wd-sec wd-perf" id="wdPerf"><div class="wrap wd-perf-in"><div class="rv"><span class="eyebrow wd-eb" dir="ltr">${WD.perfEn}</span><h2 class="h2">${L(WD.perfT)}</h2><p class="mut">${L(WD.perfS)}</p>
+  <div class="wd-speed" aria-hidden="true"><div class="wd-sp-phone"><i class="sk a"></i><i class="sk b"></i><i class="sk c"></i><i class="sk d"></i></div><div class="wd-sp-lines"><i></i><i></i><i></i></div></div></div>
+  <ul class="wd-perf-list">${WD_PERF.map(([ic, t], i) => `<li class="rv" style="--i:${i}"><span class="wd-pi">${WI[ic]}</span><span>${L(t)}</span>${lang === 'ar' ? `<small dir="ltr">${t[1]}</small>` : ''}</li>`).join('')}</ul></div></section>
 <section class="band wd-sec alt" id="wdPrice"><div class="wrap wd-price rv"><div><span class="eyebrow wd-eb" dir="ltr">${WD.priceEn}</span><h2 class="h2">${L(WD.priceAr)}</h2><p class="mut">${L(WD.priceNo)}</p>
   <button type="button" class="btn btn-y wd-price-btn" data-wdscroll="#wdForm">${L(WD.priceBtn)} ${I.arrow}</button></div>
   <div><h3 class="wd-tg">${L(WD.priceDep)}</h3><ul class="wd-factors">${WD_PRICE.map((f, i) => `<li style="--i:${i}"><span>${String(i + 1).padStart(2, '0')}</span>${L(f)}</li>`).join('')}</ul></div></div></section>
@@ -4576,8 +4628,8 @@ ${typesBlock}
   <p class="wd-note">${L(WD.pfNote)}</p></div></section>
 <section class="band" id="wdForm"><div class="wrap two"><div class="rv"><h2 class="blk-title">${L(UI.faq)}</h2>${faqBlock(s.faq.concat(GENERAL_FAQ.slice(0, 2)))}</div>
   <div class="rv"><h2 class="blk-title">${L(WD.formT)}</h2><p class="mut" style="margin:-10px 0 20px">${L(WD.formS)}</p>${wdForm()}</div></div></section>
-<section class="band"><div class="wrap"><div class="wd-cta rv"><div class="wd-cta-bg"></div><h2 class="h2">${L(WD.ctaT)}</h2><p>${L(WD.ctaS)}</p>
-  <div class="btns"><button type="button" class="btn btn-y" data-wdscroll="#wdForm">${L(WD.start)} ${I.arrow}</button><a class="btn wd-btn-neon" href="#quote-web">${L(WD.quote)}</a><a class="btn btn-wa" ${wdWaAttrs()}>${waIcon()}${L(WD.team)}</a></div></div></div></section>
+<section class="band"><div class="wrap"><div class="wd-cta rv"><div class="wd-cta-bg"></div>${lang === 'ar' ? `<span class="eyebrow wd-eb" dir="ltr">${WD.ctaEn}</span>` : ''}<h2 class="h2">${L(WD.ctaT)}</h2><p>${L(WD.ctaS)}</p>
+  <div class="btns"><button type="button" class="btn btn-y" data-wdscroll="#wdForm">${L(WD.start)} ${I.arrow}</button><a class="btn wd-btn-neon" href="#quote-web">${L(WD.getQuote)}</a><a class="btn btn-wa" ${wdWaAttrs()}>${waIcon()}${L(WD.contact)}</a></div></div></div></section>
 </div>`;
 }
 const wdForm = () => `<form class="wd-form" id="wdF" novalidate>
