@@ -1,0 +1,20 @@
+# Netlify / Cloudflare Pages caching (Vercel uses vercel.json)
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/media/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/brand-icons/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/tech-icons/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/art/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/*.webp
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/*.png
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
