@@ -1,4 +1,6 @@
 # Pro Marketing — website
+## Live site
+GitHub Pages: https://pro-marketing391.github.io/pro-marketing/
 
 Bilingual (Arabic-first, RTL / English LTR) digital marketing agency site. No build step or npm dependencies: deploy this folder to Vercel as-is.
 
