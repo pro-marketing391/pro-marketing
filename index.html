@@ -4807,7 +4807,7 @@ const KB = [
   { id: 'industry', k: ['عقار', 'عقارات', 'مطعم', 'مطاعم', 'كافيه', 'عياده', 'طبي', 'متجر الكتروني', 'تعليم', 'تدريب', 'real estate', 'restaurant', 'clinic', 'education'],
     a: () => [['نشتغل مع قطاعات كثيرة، ولكل قطاع تحدياته وحلوله: العقارات، المطاعم والضيافة، العيادات، التجارة الإلكترونية، التجزئة، التعليم وغيرها.', 'We work across many sectors, each with its own challenges and solutions: real estate, restaurants & hospitality, clinics, e-commerce, retail, education and more.']], links: () => [[L(UI.nav.industries), '#industries']] },
   { id: 'human', k: ['موظف', 'احد يكلمني', 'كلمني', 'اكلمكم', 'تواصل', 'رقمكم', 'رقم', 'واتساب', 'اتصال', 'اتصل', 'human', 'agent', 'person', 'call', 'whatsapp', 'phone', 'contact'],
-    a: () => [[`أبشر 🌷 تقدر تكلّم فريقنا مباشرة واتساب على ${CONFIG.phoneDisplay}، أو تضغط الزر تحت.`, `Sure 🌷 You can message our team directly on WhatsApp at ${CONFIG.phoneDisplay}, or tap the button below.`]], wa: true }
+    a: () => [[`أبشر 🌷 تقدر تكلّم فريقنا مباشرة واتساب على \u2066${CONFIG.phoneDisplay}\u2069، أو تضغط الزر تحت.`, `Sure 🌷 You can message our team directly on WhatsApp at ${CONFIG.phoneDisplay}, or tap the button below.`]], wa: true }
 ];
 KB.forEach(i => { i.nk = i.k.map(nz); });
 
